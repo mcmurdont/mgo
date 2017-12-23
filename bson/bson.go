@@ -694,6 +694,9 @@ func getStructInfo(st reflect.Type) (*structInfo, error) {
 		if field.PkgPath != "" && !field.Anonymous {
 			continue // Private field
 		}
+		if field.Tag.Get("protobuf_oneof") != "" {
+			continue // protobuf constraint
+		}
 
 		info := fieldInfo{Num: i}
 
